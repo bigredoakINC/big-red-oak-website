@@ -1,23 +1,40 @@
 ---
-// Newsletter signup (FR-12 / IR-02). Wired to Mailchimp later via a serverless
-// endpoint; for v1 it posts to a placeholder action and shows inline UX.
+// Newsletter signup (FR-12 / IR-02). Uses Mailchimp's embedded-form action — no API
+// key or backend needed. Set PUBLIC_MAILCHIMP_ACTION to the embedded form URL from
+// Mailchimp (Audience → Signup forms → Embedded form). Fields use Mailchimp names
+// (FNAME, EMAIL). Until set, the form shows a friendly note.
+const action = import.meta.env.PUBLIC_MAILCHIMP_ACTION || '';
+const configured = Boolean(action);
 ---
 <form
   class="flex w-full max-w-md flex-col gap-3 sm:flex-row"
-  action="#"
+  action={action || '#'}
   method="post"
-  data-newsletter
+  target="_blank"
+  rel="noopener"
   aria-label="Newsletter signup"
+  data-configured={configured ? 'true' : 'false'}
 >
   <label class="sr-only" for="nl-first">First name</label>
-  <input id="nl-first" name="firstName" type="text" required placeholder="First name"
+  <input id="nl-first" name="FNAME" type="text" required placeholder="First name"
     class="w-full rounded-full border border-line bg-white px-5 py-3 text-sm focus:border-accent" />
   <label class="sr-only" for="nl-email">Email</label>
-  <input id="nl-email" name="email" type="email" required placeholder="Email address"
+  <input id="nl-email" name="EMAIL" type="email" required placeholder="Email address"
     class="w-full rounded-full border border-line bg-white px-5 py-3 text-sm focus:border-accent" />
   <button type="submit"
     class="whitespace-nowrap rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white hover:bg-accent-ink">
     Subscribe
   </button>
 </form>
-<p class="mt-2 text-xs text-muted">Mailchimp connection pending (placeholder form).</p>
+{!configured && (
+  <p class="mt-2 text-xs text-muted">Newsletter signup is being connected to Mailchimp.</p>
+)}
+
+<script is:inline>
+  (function () {
+    const form = document.querySelector('form[aria-label="Newsletter signup"]');
+    if (form && form.dataset.configured !== 'true') {
+      form.addEventListener('submit', function (e) { e.preventDefault(); });
+    }
+  })();
+</script>

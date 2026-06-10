@@ -10,7 +10,7 @@ import { contact, site } from '../data/content';
   <Section>
     <div class="grid gap-12 md:grid-cols-2">
       <div>
-        <SectionHeading eyebrow="Contact" title={contact.intro.title} sub={contact.intro.body} />
+        <SectionHeading eyebrow="Contact" title={contact.intro.title} sub={contact.intro.body} level={1} />
         <div class="mt-8 space-y-4 text-sm">
           <p class="text-muted">Email us directly:</p>
           <a href={`mailto:${site.email}`} class="block font-serif text-xl text-ink hover:text-accent">{site.email}</a>

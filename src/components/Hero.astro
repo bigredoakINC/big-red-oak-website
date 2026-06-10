@@ -1,5 +1,6 @@
 ---
 import Button from './Button.astro';
+import { withBase } from '../lib/util';
 import { site } from '../data/content';
 
 interface Props {
@@ -7,19 +8,27 @@ interface Props {
   title: string;
   sub?: string;
   showCta?: boolean;
+  image?: string; // optional background photo (path under /public)
 }
-const { eyebrow, title, sub, showCta = true } = Astro.props;
+const { eyebrow, title, sub, showCta = true, image } = Astro.props;
 ---
-<section class="relative overflow-hidden text-white" style="background: linear-gradient(160deg, #3f4f49 0%, #586d66 55%, #61756d 100%);">
-  <div class="absolute inset-0 opacity-40" aria-hidden="true"
-       style="background: radial-gradient(55% 55% at 22% 25%, rgba(255,255,255,0.10) 0%, transparent 60%), radial-gradient(45% 45% at 82% 18%, rgba(255,255,255,0.06) 0%, transparent 55%);">
+<section class="relative overflow-hidden text-white"
+  style={image ? 'background:#3f4f49;' : 'background: linear-gradient(160deg, #3f4f49 0%, #586d66 55%, #61756d 100%);'}>
+  {image && (
+    <img src={withBase(image)} alt="" aria-hidden="true" loading="eager"
+      class="absolute inset-0 h-full w-full object-cover" />
+  )}
+  <div class="absolute inset-0" aria-hidden="true"
+    style={image
+      ? 'background: linear-gradient(155deg, rgba(14,27,42,0.82) 0%, rgba(63,79,73,0.74) 55%, rgba(88,109,102,0.66) 100%);'
+      : 'background: radial-gradient(55% 55% at 22% 25%, rgba(255,255,255,0.10) 0%, transparent 60%), radial-gradient(45% 45% at 82% 18%, rgba(255,255,255,0.06) 0%, transparent 55%);'}>
   </div>
   <div class="relative mx-auto max-w-6xl px-5 py-24 md:py-32">
     {eyebrow && (
-      <p class="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-accent">{eyebrow}</p>
+      <p class="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-white/90">{eyebrow}</p>
     )}
     <h1 class="max-w-3xl font-serif text-4xl font-semibold text-white md:text-6xl">{title}</h1>
-    {sub && <p class="mt-6 max-w-2xl text-lg text-white/75">{sub}</p>}
+    {sub && <p class="mt-6 max-w-2xl text-lg text-white/80">{sub}</p>}
     {showCta && (
       <div class="mt-9 flex flex-wrap gap-3">
         <Button href={site.bookingUrl} external>{site.ctaLabel}</Button>

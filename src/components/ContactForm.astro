@@ -1,8 +1,15 @@
 ---
-// Contact form (FR-06 / IR-05). Wired to an email relay (Resend) later; v1 is a
-// styled, accessible, validated placeholder.
+// Contact form (FR-06 / IR-05). Submits via Web3Forms (free, no backend needed on
+// static hosting) → delivers to connect@bigredoak.com. Set PUBLIC_WEB3FORMS_KEY in env.
+// Until the key is set, the form shows a friendly "not yet configured" note instead.
+const accessKey = import.meta.env.PUBLIC_WEB3FORMS_KEY || '';
+const configured = Boolean(accessKey);
 ---
-<form class="grid gap-4" action="#" method="post" data-contact aria-label="Contact form">
+<form class="grid gap-4" id="contact-form" data-configured={configured ? 'true' : 'false'} aria-label="Contact form">
+  <input type="hidden" name="access_key" value={accessKey} />
+  <input type="hidden" name="subject" value="New enquiry from bigredoak.com" />
+  <input type="hidden" name="from_name" value="Big Red Oak website" />
+
   <div class="grid gap-4 sm:grid-cols-2">
     <div>
       <label for="c-first" class="mb-1 block text-sm font-medium text-ink">First name</label>
@@ -31,9 +38,39 @@
       class="w-full rounded-lg border border-line bg-white px-4 py-3 text-sm focus:border-accent"></textarea>
   </div>
   <!-- honeypot -->
-  <input type="text" name="company_url" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+  <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
   <button type="submit" class="justify-self-start rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white hover:bg-accent-ink">
     Send message
   </button>
-  <p class="text-xs text-muted">Email delivery to connect@bigredoak.com pending (placeholder form).</p>
+  <p id="contact-status" role="status" aria-live="polite" class="text-sm text-muted"></p>
 </form>
+
+<script is:inline>
+  (function () {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+    const status = document.getElementById('contact-status');
+    const configured = form.dataset.configured === 'true';
+    if (!configured && status) {
+      status.textContent = 'Form delivery is being finalised — please email connect@bigredoak.com in the meantime.';
+    }
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      if (!configured) { window.location.href = 'mailto:connect@bigredoak.com'; return; }
+      status.textContent = 'Sending…';
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        });
+        const data = await res.json();
+        if (data.success) { form.reset(); status.textContent = 'Thanks — your message has been sent. We’ll be in touch.'; }
+        else { status.textContent = 'Something went wrong. Please email connect@bigredoak.com.'; }
+      } catch {
+        status.textContent = 'Something went wrong. Please email connect@bigredoak.com.';
+      }
+    });
+  })();
+</script>
