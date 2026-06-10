@@ -8,8 +8,14 @@ import Card from '../components/Card.astro';
 import PostCard from '../components/PostCard.astro';
 import { work } from '../data/content';
 
-const cases = (await getCollection('work', ({ data }) => !data.draft))
+const allCases = (await getCollection('work', ({ data }) => !data.draft))
   .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+const featured = allCases.filter((c) => c.data.featured);
+const rest = allCases.filter((c) => !c.data.featured);
+const INITIAL = 6; // show this many, reveal the remainder behind "View all"
+const restVisible = rest.slice(0, INITIAL);
+const restHidden = rest.slice(INITIAL);
+const fmt = (d: Date) => d.toLocaleDateString('en-CA', { year: 'numeric', month: 'short' });
 ---
 <Base title="Our Work" description={work.intro.body}>
   <Hero eyebrow="Our work" title={work.intro.title} sub={work.intro.body} showCta={false} />
@@ -23,18 +29,48 @@ const cases = (await getCollection('work', ({ data }) => !data.draft))
     </div>
   </Section>
 
-  <Section tint>
-    <SectionHeading eyebrow="Case studies" title="Selected work" sub="Featured case studies. Full project grid to be expanded as BRO confirms content." />
-    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {cases.map((c) => (
-        <PostCard
-          href={`/work/${c.slug}`}
-          title={c.data.title}
-          excerpt={c.data.summary}
-          tag={c.data.client}
-          meta={c.data.publishedAt.toLocaleDateString('en-CA', { year: 'numeric', month: 'short' })}
-        />
-      ))}
-    </div>
-  </Section>
+  {featured.length > 0 && (
+    <Section tint>
+      <SectionHeading eyebrow="Featured" title="Selected work" sub="Placeholder case studies — to be replaced with approved content as BRO confirms it." />
+      <div class="mt-10 grid gap-5 sm:grid-cols-2">
+        {featured.map((c) => (
+          <PostCard href={`/work/${c.slug}`} title={c.data.title} excerpt={c.data.summary} tag={c.data.client} meta={fmt(c.data.publishedAt)} />
+        ))}
+      </div>
+    </Section>
+  )}
+
+  {rest.length > 0 && (
+    <Section>
+      <SectionHeading eyebrow="More projects" title="The full grid" />
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {restVisible.map((c) => (
+          <PostCard href={`/work/${c.slug}`} title={c.data.title} excerpt={c.data.summary} tag={c.data.client} meta={fmt(c.data.publishedAt)} />
+        ))}
+      </div>
+
+      {restHidden.length > 0 && (
+        <>
+          <div id="more-projects" class="mt-5 hidden gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {restHidden.map((c) => (
+              <PostCard href={`/work/${c.slug}`} title={c.data.title} excerpt={c.data.summary} tag={c.data.client} meta={fmt(c.data.publishedAt)} />
+            ))}
+          </div>
+          <div class="mt-8 text-center">
+            <button id="show-more" type="button"
+              class="inline-flex items-center gap-2 rounded-full border border-line bg-white px-6 py-3 text-sm font-semibold text-ink hover:border-ink/40">
+              View all {rest.length} projects
+            </button>
+          </div>
+          <script is:inline>
+            document.getElementById('show-more')?.addEventListener('click', function () {
+              const more = document.getElementById('more-projects');
+              if (more) { more.classList.remove('hidden'); more.classList.add('grid'); }
+              this.remove();
+            });
+          </script>
+        </>
+      )}
+    </Section>
+  )}
 </Base>

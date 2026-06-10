@@ -16,6 +16,8 @@ export const site = {
   name: 'Big Red Oak',
   tagline: 'Strategy meets execution for the energy transition',
   email: 'connect@bigredoak.com',
+  url: 'https://bigredoak.com',
+  displayUrl: 'bigredoak.com',
   bookingUrl: 'https://roam.example/big-red-oak/consultation', // TODO: real Roam booking link (IR-01)
   linkedin: 'https://www.linkedin.com/company/big-red-oak/',
   ctaLabel: 'Book a Free 30-Minute Consultation',
