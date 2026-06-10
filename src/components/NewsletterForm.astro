@@ -1,0 +1,23 @@
+---
+// Newsletter signup (FR-12 / IR-02). Wired to Mailchimp later via a serverless
+// endpoint; for v1 it posts to a placeholder action and shows inline UX.
+---
+<form
+  class="flex w-full max-w-md flex-col gap-3 sm:flex-row"
+  action="#"
+  method="post"
+  data-newsletter
+  aria-label="Newsletter signup"
+>
+  <label class="sr-only" for="nl-first">First name</label>
+  <input id="nl-first" name="firstName" type="text" required placeholder="First name"
+    class="w-full rounded-full border border-line bg-white px-5 py-3 text-sm focus:border-accent" />
+  <label class="sr-only" for="nl-email">Email</label>
+  <input id="nl-email" name="email" type="email" required placeholder="Email address"
+    class="w-full rounded-full border border-line bg-white px-5 py-3 text-sm focus:border-accent" />
+  <button type="submit"
+    class="whitespace-nowrap rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white hover:bg-accent-ink">
+    Subscribe
+  </button>
+</form>
+<p class="mt-2 text-xs text-muted">Mailchimp connection pending (placeholder form).</p>

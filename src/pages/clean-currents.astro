@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import PostCard from '../components/PostCard.astro';
+import PodcastEmbed from '../components/PodcastEmbed.astro';
+import NewsletterForm from '../components/NewsletterForm.astro';
+import { cleanCurrents } from '../data/content';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+const featured = posts.find((p) => p.data.featured) ?? posts[0];
+const rest = posts.filter((p) => p.slug !== featured?.slug);
+const fmt = (d: Date) => d.toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' });
+---
+<Base title="Clean Currents" description={cleanCurrents.intro.body}>
+  <Hero eyebrow="Clean Currents" title={cleanCurrents.intro.title} sub={cleanCurrents.intro.body} showCta={false} />
+
+  {featured && (
+    <Section>
+      <SectionHeading eyebrow="Featured" title="Latest perspective" />
+      <div class="mt-8">
+        <PostCard
+          href={`/clean-currents/${featured.slug}`}
+          title={featured.data.title}
+          excerpt={featured.data.excerpt}
+          tag={featured.data.tags[0]}
+          meta={fmt(featured.data.publishedAt)}
+        />
+      </div>
+    </Section>
+  )}
+
+  {rest.length > 0 && (
+    <Section tint>
+      <SectionHeading eyebrow="Articles" title="More from the team" />
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {rest.map((p) => (
+          <PostCard
+            href={`/clean-currents/${p.slug}`}
+            title={p.data.title}
+            excerpt={p.data.excerpt}
+            tag={p.data.tags[0]}
+            meta={fmt(p.data.publishedAt)}
+          />
+        ))}
+      </div>
+    </Section>
+  )}
+
+  <Section>
+    <SectionHeading eyebrow="Podcast" title="The Clean Currents podcast" />
+    <div class="mt-10 grid gap-5 md:grid-cols-2">
+      <PodcastEmbed platform="spotify" src={cleanCurrents.spotifyShowUrl} />
+      <PodcastEmbed platform="apple" src={cleanCurrents.applePodcastUrl} />
+    </div>
+  </Section>
+
+  <Section tint>
+    <div class="mx-auto max-w-2xl text-center">
+      <SectionHeading eyebrow="Newsletter" title="Stay in the current" center sub="Perspectives on the energy transition, straight to your inbox." />
+      <div class="mt-8 flex justify-center"><NewsletterForm /></div>
+    </div>
+  </Section>
+</Base>

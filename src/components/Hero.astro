@@ -1,0 +1,30 @@
+---
+import Button from './Button.astro';
+import { site } from '../data/content';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  sub?: string;
+  showCta?: boolean;
+}
+const { eyebrow, title, sub, showCta = true } = Astro.props;
+---
+<section class="relative overflow-hidden bg-ink text-white">
+  <div class="absolute inset-0 opacity-30" aria-hidden="true"
+       style="background: radial-gradient(60% 60% at 25% 30%, rgba(27,107,76,0.45) 0%, transparent 60%), radial-gradient(50% 50% at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 55%);">
+  </div>
+  <div class="relative mx-auto max-w-6xl px-5 py-24 md:py-32">
+    {eyebrow && (
+      <p class="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-accent">{eyebrow}</p>
+    )}
+    <h1 class="max-w-3xl font-serif text-4xl font-semibold text-white md:text-6xl">{title}</h1>
+    {sub && <p class="mt-6 max-w-2xl text-lg text-white/75">{sub}</p>}
+    {showCta && (
+      <div class="mt-9 flex flex-wrap gap-3">
+        <Button href={site.bookingUrl} external>{site.ctaLabel}</Button>
+        <Button href="/our-work" variant="light">See our work</Button>
+      </div>
+    )}
+  </div>
+</section>

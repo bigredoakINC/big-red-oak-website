@@ -1,0 +1,28 @@
+---
+interface Props {
+  platform: 'spotify' | 'apple';
+  src: string;
+}
+const { platform, src } = Astro.props;
+const label = platform === 'spotify' ? 'Spotify' : 'Apple Podcasts';
+const isPlaceholder = src.includes('PLACEHOLDER');
+---
+<div class="rounded-[var(--radius-card)] border border-line bg-white p-4">
+  <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-muted">{label}</p>
+  {isPlaceholder ? (
+    <div class="flex h-40 items-center justify-center rounded-lg bg-mist text-center text-sm text-muted">
+      {label} embed — add the real show ID in <code class="mx-1">content.ts</code>
+    </div>
+  ) : (
+    <iframe
+      title={`${label} player`}
+      src={src}
+      loading="lazy"
+      width="100%"
+      height="232"
+      frameborder="0"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      class="rounded-lg"
+    ></iframe>
+  )}
+</div>

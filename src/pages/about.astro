@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Card from '../components/Card.astro';
+import { about, memberships } from '../data/content';
+---
+<Base title="About" description={about.story.body}>
+  <Hero eyebrow="About" title="Built for the energy transition" sub={about.story.body} showCta={false} />
+
+  <Section>
+    <div class="grid gap-10 md:grid-cols-2">
+      <SectionHeading title={about.story.title} sub={about.story.body} />
+      <SectionHeading title={about.name.title} sub={about.name.body} />
+    </div>
+  </Section>
+
+  <Section tint>
+    <SectionHeading eyebrow="Our team" title="Senior people, not hand-offs" />
+    <p class="mt-2 text-xs text-muted">Bios &amp; headshots to be supplied by BRO (placeholders shown).</p>
+    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {about.team.map((m) => (
+        <Card title={m.name} eyebrow={m.role}>{m.bio}</Card>
+      ))}
+    </div>
+  </Section>
+
+  <Section>
+    <SectionHeading eyebrow="Partners" title="Who we work with" />
+    <div class="mt-8 flex flex-wrap gap-4">
+      {about.partners.map((p) => (
+        <span class="rounded-full border border-line bg-white px-5 py-2 text-sm text-muted">{p}</span>
+      ))}
+    </div>
+  </Section>
+
+  <Section tint>
+    <SectionHeading eyebrow="Advisory board" title="Guidance from the sector" />
+    <div class="mt-10 grid gap-5 sm:grid-cols-2">
+      {about.advisory.map((m) => (
+        <Card title={m.name} eyebrow={m.role}>{m.bio}</Card>
+      ))}
+    </div>
+  </Section>
+
+  <Section>
+    <SectionHeading eyebrow="Memberships" title="Affiliations" />
+    <p class="mt-6 font-serif text-xl text-ink">{memberships.join('  ·  ')}</p>
+  </Section>
+</Base>

@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+/*
+  Big Red Oak — design tokens (PLACEHOLDER, pending official brand guidelines / BR-01).
+  Direction per PRD: high-end, clean, simplified, photo-realistic, sector-credible.
+  Visual reference: integratedbiosciences.com (lots of whitespace, dark hero, single accent).
+  Swap these values once the BRO brand guidelines land — nothing else needs to change.
+*/
+@theme {
+  --color-ink: #0e1b2a;        /* near-black navy — hero / headings */
+  --color-ink-soft: #1b2c40;
+  --color-body: #2b3543;       /* body text */
+  --color-muted: #66707e;      /* secondary text */
+  --color-line: #e4e8ed;       /* hairline borders */
+  --color-paper: #ffffff;
+  --color-mist: #f6f8fa;       /* section tint */
+  --color-accent: #1b6b4c;     /* clean-energy green */
+  --color-accent-ink: #134f39;
+  --color-accent-soft: #e7f2ec;
+
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
+
+  --radius-card: 14px;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-body);
+  background: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.65;
+}
+
+h1, h2, h3, h4 {
+  color: var(--color-ink);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* Accessible focus ring */
+:where(a, button, input, textarea, select, summary):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 200;
+  background: var(--color-ink);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 0 0 8px 0;
+}
+.skip-link:focus { left: 0; }
+
+/* Logo ticker animation */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-ticker { animation: ticker 28s linear infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker { animation: none; }
+  html { scroll-behavior: auto; }
+}

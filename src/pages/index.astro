@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Card from '../components/Card.astro';
+import LogoTicker from '../components/LogoTicker.astro';
+import FAQ from '../components/FAQ.astro';
+import Button from '../components/Button.astro';
+import { home, site } from '../data/content';
+---
+<Base title="Home" description={home.hero.sub}>
+  <Hero eyebrow={home.hero.eyebrow} title={home.hero.title} sub={home.hero.sub} />
+
+  <LogoTicker />
+
+  <!-- Who we are / stats -->
+  <Section>
+    <div class="grid gap-10 md:grid-cols-2 md:items-center">
+      <SectionHeading eyebrow="Who we are" title="A specialist agency for the energy transition" sub={home.problem.body} />
+      <div class="grid grid-cols-3 gap-4">
+        {home.stats.map((s) => (
+          <div class="rounded-[var(--radius-card)] border border-line bg-mist p-5 text-center">
+            <div class="font-serif text-3xl font-semibold text-ink">{s.value}</div>
+            <div class="mt-1 text-xs uppercase tracking-wider text-muted">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </Section>
+
+  <!-- Why BRO -->
+  <Section tint>
+    <SectionHeading eyebrow="Why Big Red Oak" title="Strategy first. Sector deep." />
+    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {home.why.map((w) => (
+        <Card title={w.title}>{w.body}</Card>
+      ))}
+    </div>
+  </Section>
+
+  <!-- Who we serve -->
+  <Section>
+    <SectionHeading eyebrow="Who we serve" title="From major operators to emerging suppliers" />
+    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {home.serve.map((t) => (
+        <Card title={t.tier}>{t.body}</Card>
+      ))}
+    </div>
+  </Section>
+
+  <!-- Testimonial -->
+  <Section tint>
+    <figure class="mx-auto max-w-3xl text-center">
+      <blockquote class="font-serif text-2xl font-medium leading-snug text-ink md:text-3xl">
+        “{home.testimonial.quote}”
+      </blockquote>
+      <figcaption class="mt-5 text-sm text-muted">
+        <span class="font-semibold text-ink">{home.testimonial.name}</span> — {home.testimonial.role}
+      </figcaption>
+    </figure>
+  </Section>
+
+  <!-- FAQ -->
+  <Section>
+    <SectionHeading eyebrow="FAQ" title="Questions, answered" center />
+    <div class="mt-10"><FAQ items={home.faqs} /></div>
+  </Section>
+
+  <!-- Closing CTA -->
+  <section class="bg-ink">
+    <div class="mx-auto max-w-4xl px-5 py-20 text-center">
+      <h2 class="font-serif text-3xl font-semibold text-white md:text-4xl">Ready to make your work land?</h2>
+      <p class="mx-auto mt-4 max-w-xl text-white/70">Book a free 30-minute consultation. We’ll tell you honestly whether we’re the right fit.</p>
+      <div class="mt-8 flex justify-center">
+        <Button href={site.bookingUrl} external>{site.ctaLabel}</Button>
+      </div>
+    </div>
+  </section>
+</Base>

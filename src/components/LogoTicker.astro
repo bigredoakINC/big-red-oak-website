@@ -1,0 +1,17 @@
+---
+import { socialProofLogos } from '../data/content';
+const items = [...socialProofLogos, ...socialProofLogos]; // duplicate for seamless loop
+---
+<div class="border-y border-line bg-white py-7">
+  <p class="mb-5 text-center text-xs font-semibold uppercase tracking-[0.15em] text-muted">
+    Trusted across the energy sector
+  </p>
+  <div class="relative overflow-hidden">
+    <div class="flex w-max animate-ticker gap-12 px-6">
+      {items.map((name) => (
+        <span class="whitespace-nowrap font-serif text-lg font-medium text-ink/40">{name}</span>
+      ))}
+    </div>
+  </div>
+  <p class="mt-3 text-center text-[11px] text-muted/70">Logo assets to be supplied by BRO (placeholder wordmarks shown).</p>
+</div>

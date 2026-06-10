@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Button from '../components/Button.astro';
+import { contact, site } from '../data/content';
+---
+<Base title="Contact" description={contact.intro.body}>
+  <Section>
+    <div class="grid gap-12 md:grid-cols-2">
+      <div>
+        <SectionHeading eyebrow="Contact" title={contact.intro.title} sub={contact.intro.body} />
+        <div class="mt-8 space-y-4 text-sm">
+          <p class="text-muted">Email us directly:</p>
+          <a href={`mailto:${site.email}`} class="block font-serif text-xl text-ink hover:text-accent">{site.email}</a>
+          <div class="pt-4">
+            <Button href={site.bookingUrl} external>{site.ctaLabel}</Button>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-[var(--radius-card)] border border-line bg-mist p-7">
+        <ContactForm />
+      </div>
+    </div>
+  </Section>
+</Base>

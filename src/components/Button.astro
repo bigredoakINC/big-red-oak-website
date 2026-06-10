@@ -1,0 +1,24 @@
+---
+import { withBase } from '../lib/util';
+
+interface Props {
+  href: string;
+  variant?: 'primary' | 'ghost' | 'light';
+  class?: string;
+  external?: boolean;
+}
+const { href, variant = 'primary', class: cls = '', external = false } = Astro.props;
+
+const base =
+  'inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-colors duration-200';
+const styles = {
+  primary: 'bg-accent text-white hover:bg-accent-ink',
+  ghost: 'border border-ink/20 text-ink hover:border-ink/50',
+  light: 'bg-white text-ink hover:bg-mist',
+};
+const rel = external ? 'noopener noreferrer' : undefined;
+const target = external ? '_blank' : undefined;
+---
+<a href={withBase(href)} class={`${base} ${styles[variant]} ${cls}`} rel={rel} target={target}>
+  <slot />
+</a>

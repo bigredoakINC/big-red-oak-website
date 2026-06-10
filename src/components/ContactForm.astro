@@ -1,0 +1,39 @@
+---
+// Contact form (FR-06 / IR-05). Wired to an email relay (Resend) later; v1 is a
+// styled, accessible, validated placeholder.
+---
+<form class="grid gap-4" action="#" method="post" data-contact aria-label="Contact form">
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for="c-first" class="mb-1 block text-sm font-medium text-ink">First name</label>
+      <input id="c-first" name="firstName" type="text" required
+        class="w-full rounded-lg border border-line bg-white px-4 py-3 text-sm focus:border-accent" />
+    </div>
+    <div>
+      <label for="c-last" class="mb-1 block text-sm font-medium text-ink">Last name</label>
+      <input id="c-last" name="lastName" type="text" required
+        class="w-full rounded-lg border border-line bg-white px-4 py-3 text-sm focus:border-accent" />
+    </div>
+  </div>
+  <div>
+    <label for="c-org" class="mb-1 block text-sm font-medium text-ink">Organization</label>
+    <input id="c-org" name="organization" type="text"
+      class="w-full rounded-lg border border-line bg-white px-4 py-3 text-sm focus:border-accent" />
+  </div>
+  <div>
+    <label for="c-email" class="mb-1 block text-sm font-medium text-ink">Email</label>
+    <input id="c-email" name="email" type="email" required
+      class="w-full rounded-lg border border-line bg-white px-4 py-3 text-sm focus:border-accent" />
+  </div>
+  <div>
+    <label for="c-msg" class="mb-1 block text-sm font-medium text-ink">Message</label>
+    <textarea id="c-msg" name="message" rows="5" required
+      class="w-full rounded-lg border border-line bg-white px-4 py-3 text-sm focus:border-accent"></textarea>
+  </div>
+  <!-- honeypot -->
+  <input type="text" name="company_url" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+  <button type="submit" class="justify-self-start rounded-full bg-accent px-7 py-3 text-sm font-semibold text-white hover:bg-accent-ink">
+    Send message
+  </button>
+  <p class="text-xs text-muted">Email delivery to connect@bigredoak.com pending (placeholder form).</p>
+</form>
