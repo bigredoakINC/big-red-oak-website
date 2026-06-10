@@ -5,14 +5,15 @@
   Source: Brand Voice & Style Guidelines v0.1 (self-generated draft, 2026-06-10),
   scraped from the live bigredoak.com Squarespace stylesheets. Pending Lee de Lang's review.
 
-  The brand is GREEN, not red ("red oak" = the tree). Visual identity is a muted
-  forest/sage green + off-white + neutral grays — clean, minimal, restrained.
-  A dedicated bright "accent" (possibly a brand red) is still TBD with Lee; until then
-  the forest green doubles as the primary action color.
-
-  Fonts: brand uses Proxima Nova + Halyard Display (Adobe Typekit). Typekit licensing
-  for the new build is unconfirmed, so we use Mulish — the closest open-source match —
-  as a faithful stand-in. Swap to the Typekit kit later if the licence carries over.
+  PLACEHOLDER DECISIONS (confirmed by Rafa 2026-06-10, pending Lee's final review):
+  1. NO RED in the palette. The brand is GREEN ("red oak" = the tree). Identity is a
+     muted forest/sage green + off-white + neutral grays. The forest green is the
+     primary action color — there is no separate red accent.
+  2. FONT = the current live website's font, Proxima Nova. It's loaded first in the
+     stack so it renders the moment a valid Adobe Fonts kit covering our domain exists.
+     Until Lee authorizes our domain in his Adobe Fonts account, Mulish (the closest
+     open-source match) is the visible stand-in, then the brand's own fallback stack.
+  3. Canadian spelling throughout.
 */
 @theme {
   --color-ink: #586d66;        /* brand forest/sage green — headings, dark sections, anchor */
@@ -22,12 +23,14 @@
   --color-line: #dcdcdc;       /* brand light gray — dividers / borders */
   --color-paper: #ffffff;      /* white — cards / content bands */
   --color-mist: #fafafa;       /* brand off-white — page canvas */
-  --color-accent: #586d66;     /* primary action — brand green (dedicated accent TBD w/ Lee) */
+  --color-accent: #586d66;     /* primary action — brand green (NO red, per decision) */
   --color-accent-ink: #45554f; /* hover */
   --color-accent-soft: #eaeeec;
 
-  --font-sans: "Mulish", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-serif: "Mulish", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* Proxima Nova (live-site font) first; Mulish renders as the near-match stand-in
+     until our domain is added to a Proxima Nova Adobe Fonts kit; brand fallback last. */
+  --font-sans: "proxima-nova", "Mulish", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-serif: "proxima-nova", "Mulish", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   --radius-card: 14px;
 }
