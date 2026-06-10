@@ -1,25 +1,33 @@
 @import "tailwindcss";
 
 /*
-  Big Red Oak — design tokens (PLACEHOLDER, pending official brand guidelines / BR-01).
-  Direction per PRD: high-end, clean, simplified, photo-realistic, sector-credible.
-  Visual reference: integratedbiosciences.com (lots of whitespace, dark hero, single accent).
-  Swap these values once the BRO brand guidelines land — nothing else needs to change.
+  Big Red Oak — design tokens.
+  Source: Brand Voice & Style Guidelines v0.1 (self-generated draft, 2026-06-10),
+  scraped from the live bigredoak.com Squarespace stylesheets. Pending Lee de Lang's review.
+
+  The brand is GREEN, not red ("red oak" = the tree). Visual identity is a muted
+  forest/sage green + off-white + neutral grays — clean, minimal, restrained.
+  A dedicated bright "accent" (possibly a brand red) is still TBD with Lee; until then
+  the forest green doubles as the primary action color.
+
+  Fonts: brand uses Proxima Nova + Halyard Display (Adobe Typekit). Typekit licensing
+  for the new build is unconfirmed, so we use Mulish — the closest open-source match —
+  as a faithful stand-in. Swap to the Typekit kit later if the licence carries over.
 */
 @theme {
-  --color-ink: #0e1b2a;        /* near-black navy — hero / headings */
-  --color-ink-soft: #1b2c40;
-  --color-body: #2b3543;       /* body text */
-  --color-muted: #66707e;      /* secondary text */
-  --color-line: #e4e8ed;       /* hairline borders */
-  --color-paper: #ffffff;
-  --color-mist: #f6f8fa;       /* section tint */
-  --color-accent: #1b6b4c;     /* clean-energy green */
-  --color-accent-ink: #134f39;
-  --color-accent-soft: #e7f2ec;
+  --color-ink: #586d66;        /* brand forest/sage green — headings, dark sections, anchor */
+  --color-ink-deep: #3f4f49;   /* deeper green for hero depth */
+  --color-body: #2b2f2e;       /* near-black neutral — body text */
+  --color-muted: #737373;      /* brand neutral gray — secondary text */
+  --color-line: #dcdcdc;       /* brand light gray — dividers / borders */
+  --color-paper: #ffffff;      /* white — cards / content bands */
+  --color-mist: #fafafa;       /* brand off-white — page canvas */
+  --color-accent: #586d66;     /* primary action — brand green (dedicated accent TBD w/ Lee) */
+  --color-accent-ink: #45554f; /* hover */
+  --color-accent-soft: #eaeeec;
 
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans: "Mulish", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-serif: "Mulish", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   --radius-card: 14px;
 }
@@ -32,15 +40,17 @@ html {
 body {
   font-family: var(--font-sans);
   color: var(--color-body);
-  background: var(--color-paper);
+  background: var(--color-mist);   /* off-white brand canvas */
+  font-size: 1.0625rem;            /* 17px — matches the brand base size */
   -webkit-font-smoothing: antialiased;
   line-height: 1.65;
 }
 
 h1, h2, h3, h4 {
   color: var(--color-ink);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: -0.015em;
 }
 
 /* Accessible focus ring */

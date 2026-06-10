@@ -10,9 +10,9 @@ interface Props {
 }
 const { eyebrow, title, sub, showCta = true } = Astro.props;
 ---
-<section class="relative overflow-hidden bg-ink text-white">
-  <div class="absolute inset-0 opacity-30" aria-hidden="true"
-       style="background: radial-gradient(60% 60% at 25% 30%, rgba(27,107,76,0.45) 0%, transparent 60%), radial-gradient(50% 50% at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 55%);">
+<section class="relative overflow-hidden text-white" style="background: linear-gradient(160deg, #3f4f49 0%, #586d66 55%, #61756d 100%);">
+  <div class="absolute inset-0 opacity-40" aria-hidden="true"
+       style="background: radial-gradient(55% 55% at 22% 25%, rgba(255,255,255,0.10) 0%, transparent 60%), radial-gradient(45% 45% at 82% 18%, rgba(255,255,255,0.06) 0%, transparent 55%);">
   </div>
   <div class="relative mx-auto max-w-6xl px-5 py-24 md:py-32">
     {eyebrow && (

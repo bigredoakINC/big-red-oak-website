@@ -6,13 +6,15 @@
   When the Sanity project exists, each export here maps 1:1 to a GROQ query — the
   components don't change, only the data source.
 
-  COPY NOTE: text below is structural placeholder derived from the PRD outline.
-  Replace verbatim with the approved 2026 copy deck (requirement BR-05) before launch.
+  COPY NOTE: text below is now VOICE-ALIGNED to Brand Voice & Style Guidelines v0.1
+  (self-generated draft, 2026-06-10) — signature lines and tone are drawn from the live
+  site. It is still a working draft: replace verbatim with the approved 2026 copy deck
+  (requirement BR-05) before launch, and re-confirm voice with Lee.
 */
 
 export const site = {
   name: 'Big Red Oak',
-  tagline: 'Strategic communications for the energy transition',
+  tagline: 'Strategy meets execution for the energy transition',
   email: 'connect@bigredoak.com',
   bookingUrl: 'https://roam.example/big-red-oak/consultation', // TODO: real Roam booking link (IR-01)
   linkedin: 'https://www.linkedin.com/company/big-red-oak/',
@@ -29,16 +31,17 @@ export const nav = [
 
 export const memberships = ['CNA', 'CNS', 'ANS', 'OCNI', 'CNIC', 'TRBOT'];
 
+// Real clients confirmed on the live site (brand guidelines v0.1). Logo assets TBD from BRO.
 export const socialProofLogos = [
-  'Bruce Power', 'Westinghouse', 'CNL', 'OPG', 'Conexus', 'ONA',
+  'Westinghouse', 'Bruce Power', 'LifeLabs', 'Conexus', 'CCRM', 'OPG',
 ];
 
 // ---------------------------------------------------------------- HOME
 export const home = {
   hero: {
-    eyebrow: 'Clean energy · Nuclear · Energy transition',
-    title: 'Communications that move the energy transition forward',
-    sub: 'Big Red Oak is a specialist marketing and communications agency for the clean energy, nuclear, and energy transition sectors. We turn complex, high-stakes work into clear, credible stories.',
+    eyebrow: 'We speak energy',
+    title: 'You power the future. We power your story.',
+    sub: 'Big Red Oak is Canada’s clean energy communications specialist — strategists, writers, and media pros who already speak your sector. From nuclear to wind to the grid that ties it together, we turn complex energy work into clear narratives that move regulators, communities, and the people you need on side.',
   },
   stats: [
     { value: '15+', label: 'Years in the sector' },
@@ -46,14 +49,14 @@ export const home = {
     { value: '6', label: 'Core capabilities' },
   ],
   problem: {
-    title: 'The problem we solve',
-    body: 'Energy and nuclear organizations do extraordinary, complicated work — and too often it gets lost in jargon, caution, or noise. We make the case clearly, to the people who matter, without losing the technical truth.',
+    title: 'Complexity becomes connection',
+    body: 'Energy and nuclear organizations do extraordinary, complicated work — and too often it gets lost in jargon or noise. We name the technical reality accurately, then make it land with the audiences that decide your future: regulators, communities, employees, and investors.',
   },
   why: [
-    { title: 'Sector fluency', body: 'We speak the language of reactors, grids, storage, and policy — no ramp-up, no hand-holding.' },
-    { title: 'Strategic depth', body: 'We lead with strategy, not production. The deliverables follow the thinking.' },
-    { title: 'Stakeholder trust', body: 'Two decades of relationships across operators, regulators, and communities.' },
-    { title: 'Senior team', body: 'You work with the strategists, not a junior hand-off.' },
+    { title: 'We speak energy', body: 'Sector specialism, not generalism. No learning curve — we know transmission from distribution, and why a refurbishment is politically sensitive.' },
+    { title: 'Strategy meets execution', body: 'In-house strategists and media pros under one roof. No hand-offs to a separate production shop.' },
+    { title: 'We solve problems', body: 'The bottom line? We solve problems for our clients. Outcomes over aesthetics, every time.' },
+    { title: 'Built for one industry', body: 'We built Big Red Oak for energy alone — so your message starts with fluency, not a brief.' },
   ],
   serve: [
     { tier: 'Enterprise', body: 'Major operators and large organizations who arrive via referral and need the website to validate reputation.' },
@@ -70,7 +73,7 @@ export const home = {
   testimonial: {
     quote: 'Big Red Oak understood our world from day one. They made a genuinely complex story land with the audiences that mattered.',
     name: 'Conexus',
-    role: 'Client',
+    role: 'Client (placeholder quote — to confirm)',
   },
 };
 
@@ -78,7 +81,7 @@ export const home = {
 export const about = {
   story: {
     title: 'Our story',
-    body: 'Big Red Oak was built by communicators who knew the energy sector deserved better than generic agency work. We pair strategic communications craft with deep sector knowledge — so the work is both sharp and true.',
+    body: 'We built Big Red Oak for one industry: energy. That focus means no learning curve — we understand refurbishments, interconnection queues, and social licence the way you do. Our in-house team runs strategy and execution under one roof, so the insight that shapes your message is the same team that brings it to life. The bottom line? We solve problems for our clients.',
   },
   name: {
     title: "What's in a name",
@@ -99,8 +102,8 @@ export const about = {
 // ---------------------------------------------------------------- OUR WORK
 export const work = {
   intro: {
-    title: 'Our work',
-    body: 'Strategy-led communications across the energy transition. Six core capabilities, applied to the sector’s hardest stories.',
+    title: 'From insight to impact',
+    body: 'Strategy-led communications across the energy transition — run through our four-phase process: Discovery, Definition, Design, Delivery. Six core capabilities, applied to the sector’s hardest stories.',
   },
   capabilities: [
     { title: 'Stakeholder Engagement', body: 'Building trust with regulators, communities, and partners.' },
