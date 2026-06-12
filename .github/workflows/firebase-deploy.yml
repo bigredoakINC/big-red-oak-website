@@ -1,0 +1,38 @@
+name: Deploy to Firebase Hosting (production)
+
+# Goes live on every push to main — but only once Firebase is configured.
+# Enable by setting repo variable FIREBASE_ENABLED=true and adding:
+#   - secret  FIREBASE_SERVICE_ACCOUNT  (JSON key for a deploy service account)
+#   - variable FIREBASE_PROJECT_ID      (the Firebase project id)
+#   - variable SITE_URL                 (e.g. https://bigredoak.com)
+# Until enabled, this job is skipped so CI never fails.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    if: ${{ vars.FIREBASE_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+        env:
+          DEPLOY_TARGET: firebase
+          SITE_URL: ${{ vars.SITE_URL }}
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          channelId: live
+          projectId: ${{ vars.FIREBASE_PROJECT_ID }}
