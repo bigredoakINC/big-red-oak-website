@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nuclear Reactor Cheat Sheet</title>
+<style>
+:root{
+  --bg:#f7f8f6; --paper:#ffffff; --ink:#17211b; --muted:#5d6b62;
+  --accent:#7f2f2a; --accent2:#d9e5dc; --line:#dfe6e1; --soft:#eef3ef;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);line-height:1.5}
+.page{max-width:1200px;margin:0 auto;padding:40px 28px 56px}
+.header{display:grid;grid-template-columns:1.4fr .8fr;gap:28px;align-items:end;margin-bottom:28px}
+.eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:var(--accent);margin-bottom:8px}
+h1{font-size:42px;line-height:1.05;margin:0 0 12px}
+.lead{font-size:20px;color:var(--muted);max-width:780px;margin:0}
+.keybox{background:var(--ink);color:#fff;border-radius:18px;padding:22px}
+.keybox strong{font-size:22px;display:block;margin-bottom:8px}
+.keybox p{margin:0;color:#e8eee9}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:26px 0 34px}
+.step{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center;font-weight:750}
+.section-title{font-size:24px;margin:34px 0 14px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px}
+.card h3{font-size:22px;margin:0 0 6px}
+.tag{display:inline-block;padding:4px 8px;border-radius:999px;background:var(--soft);font-size:12px;font-weight:800;color:var(--accent);margin-bottom:12px}
+.card p{margin:7px 0;color:var(--muted)}
+.card .adv{color:var(--ink);font-weight:700}
+.compare{width:100%;border-collapse:separate;border-spacing:0;background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;font-size:14px}
+.compare th,.compare td{padding:13px 14px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+.compare th{background:#f0f4f1;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.compare tr:last-child td{border-bottom:none}
+.note{margin-top:20px;background:var(--accent2);border-radius:16px;padding:18px 20px}
+.note strong{color:var(--accent)}
+.footer{margin-top:34px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:16px}
+@media (max-width:800px){
+  .header{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.flow{grid-template-columns:1fr}
+  h1{font-size:34px}.compare{font-size:12px}.compare th,.compare td{padding:10px}
+}
+@media print{
+  body{background:#fff}.page{max-width:none;padding:18mm}
+  .card,.keybox,.compare,.step,.note{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div>
+      <div class="eyebrow">Big Red Oak • Nuclear Basics</div>
+      <h1>Nuclear Reactor Cheat Sheet</h1>
+      <p class="lead">A plain-language guide to the main reactor types, what makes them different, and why each one exists.</p>
+    </div>
+    <div class="keybox">
+      <strong>The simplest way to think about nuclear</strong>
+      <p>Every reactor is basically a machine for making heat. The differences are mainly how it moves that heat, what slows the neutrons, what fuel it uses, and how hot or pressurized it operates.</p>
+    </div>
+  </div>
+
+  <div class="flow">
+    <div class="step">1. Split atoms</div><div class="step">2. Make heat</div><div class="step">3. Move the heat</div><div class="step">4. Make steam / hot gas</div><div class="step">5. Spin a turbine → electricity</div>
+  </div>
+
+  <h2 class="section-title">The reactor families</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="tag">LIGHT WATER REACTOR</div>
+      <h3>PWR — Pressurized Water Reactor</h3>
+      <p><strong>What it is:</strong> Normal water flows through the reactor core, gets very hot, but is kept under such high pressure that it does not boil.</p>
+      <p><strong>How it makes steam:</strong> That hot reactor water heats a separate water loop, which boils and drives the turbine.</p>
+      <p class="adv">Main advantages: proven, widely used, separate reactor and turbine water loops, huge operating experience.</p>
+      <p><strong>Examples:</strong> AP1000, AP300, EPR, APR1400, VVER.</p>
+    </div>
+    <div class="card">
+      <div class="tag">LIGHT WATER REACTOR</div>
+      <h3>BWR — Boiling Water Reactor</h3>
+      <p><strong>What it is:</strong> Normal water boils directly inside the reactor vessel.</p>
+      <p><strong>How it makes steam:</strong> Steam goes straight from the reactor to the turbine.</p>
+      <p class="adv">Main advantages: simpler steam system, fewer major components.</p>
+      <p><strong>Example:</strong> GE Hitachi BWRX-300.</p>
+    </div>
+    <div class="card">
+      <div class="tag">HEAVY WATER REACTOR</div>
+      <h3>CANDU / PHWR</h3>
+      <p><strong>What it is:</strong> Uses heavy water instead of ordinary water and fuel channels instead of one giant pressure vessel.</p>
+      <p><strong>Why that matters:</strong> Heavy water absorbs fewer neutrons, so traditional CANDU reactors can use natural uranium.</p>
+      <p class="adv">Main advantages: fuel flexibility, natural uranium, online refuelling.</p>
+      <p><strong>Canada connection:</strong> The CANDU design is one of Canada's signature nuclear technologies.</p>
+    </div>
+    <div class="card">
+      <div class="tag">ADVANCED REACTOR</div>
+      <h3>HTGR — High-Temperature Gas Reactor</h3>
+      <p><strong>What it is:</strong> Uses gas—often helium—to carry heat from the core, usually with graphite as the moderator.</p>
+      <p><strong>Why it is different:</strong> Can operate at much higher temperatures than conventional water reactors.</p>
+      <p class="adv">Main advantages: high-temperature industrial heat, hydrogen potential, strong passive-safety concepts.</p>
+      <p><strong>Example:</strong> X-energy Xe-100.</p>
+    </div>
+    <div class="card">
+      <div class="tag">ADVANCED REACTOR</div>
+      <h3>Molten Salt Reactor</h3>
+      <p><strong>What it is:</strong> Uses hot liquid salt as the coolant. In some designs, the fuel itself is dissolved in the salt.</p>
+      <p><strong>Why it is different:</strong> Salt can operate at high temperatures without the enormous pressure needed in a PWR.</p>
+      <p class="adv">Main advantages: high temperature, low pressure, potential fuel-cycle flexibility.</p>
+      <p><strong>Example:</strong> Terrestrial Energy IMSR.</p>
+    </div>
+    <div class="card">
+      <div class="tag">FAST REACTOR</div>
+      <h3>Sodium- or Lead-Cooled Fast Reactor</h3>
+      <p><strong>What it is:</strong> Does not slow neutrons down. It uses fast neutrons and usually a liquid metal coolant instead of water.</p>
+      <p><strong>Why it is different:</strong> Fast neutrons can make much greater use of the energy in uranium and can potentially consume some long-lived actinides.</p>
+      <p class="adv">Main advantages: better fuel utilization, advanced fuel-cycle options, potential waste reduction.</p>
+      <p><strong>Example:</strong> TerraPower Natrium uses sodium cooling.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">Quick comparison</h2>
+  <table class="compare">
+    <thead><tr><th>Type</th><th>Coolant</th><th>Moderator</th><th>What makes it useful</th></tr></thead>
+    <tbody>
+      <tr><td><strong>PWR</strong></td><td>Light water</td><td>Light water</td><td>Mature, proven, dominant global technology</td></tr>
+      <tr><td><strong>BWR</strong></td><td>Light water</td><td>Light water</td><td>Simpler steam cycle</td></tr>
+      <tr><td><strong>CANDU / PHWR</strong></td><td>Heavy water</td><td>Heavy water</td><td>Natural uranium, fuel flexibility, online refuelling</td></tr>
+      <tr><td><strong>HTGR</strong></td><td>Helium / gas</td><td>Graphite</td><td>Very high-temperature heat</td></tr>
+      <tr><td><strong>Molten Salt</strong></td><td>Molten salt</td><td>Depends</td><td>High temperature at low pressure</td></tr>
+      <tr><td><strong>Sodium Fast</strong></td><td>Liquid sodium</td><td>None</td><td>Advanced fuel use and fuel-cycle options</td></tr>
+      <tr><td><strong>Lead Fast</strong></td><td>Liquid lead</td><td>None</td><td>Fast-spectrum benefits with high boiling-point coolant</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <strong>Important terminology:</strong> “SMR” is not a reactor physics type. It means <em>Small Modular Reactor</em>. A reactor can be both an SMR and a PWR, BWR, gas reactor, molten-salt reactor, or fast reactor. AP300 = PWR SMR. BWRX-300 = BWR SMR. Xe-100 = gas-cooled SMR.
+  </div>
+
+  <h2 class="section-title">The 30-second version</h2>
+  <div class="grid">
+    <div class="card"><h3>PWR</h3><p>“Use water, but keep it under huge pressure so it won’t boil.”</p></div>
+    <div class="card"><h3>BWR</h3><p>“Let the water boil in the reactor and send the steam straight to the turbine.”</p></div>
+    <div class="card"><h3>CANDU</h3><p>“Use heavy water so we can use natural uranium and refuel while running.”</p></div>
+    <div class="card"><h3>Gas reactor</h3><p>“Use helium so we can run much hotter.”</p></div>
+    <div class="card"><h3>Molten salt</h3><p>“Use liquid salt so we can run hot without huge pressure.”</p></div>
+    <div class="card"><h3>Fast reactor</h3><p>“Don’t slow the neutrons down; use them to get more from the fuel.”</p></div>
+  </div>
+  <div class="footer">Prepared as a plain-language internal reference. Technical details are simplified for clarity.</div>
+</div>
+</body>
+</html>
